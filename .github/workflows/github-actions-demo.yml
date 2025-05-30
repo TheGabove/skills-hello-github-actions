@@ -1,0 +1,25 @@
+name: Simulate Running Task
+
+on:
+  schedule:
+    - cron: '20 22 * * *'  # 每天 UTC 22:20，对应北京时间 6:20
+  workflow_dispatch:        # 可选，支持手动触发调试
+
+jobs:
+  simulate-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run your script
+        run: python3 running.py
